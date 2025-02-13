@@ -85,11 +85,93 @@ from books
 group by author_lname,author_fname
 order by first_book;
 
-select author_lname,
-		author_fname,
-		count(*) AS boks_written, 
+select 
+	author_lname,
+	author_fname,
+	count(*) AS boks_written, 
         max(released_year) AS latest_release, 
         min(released_year) AS earliest_release,
         max(pages) AS longest_page_count
 from books
 group by author_lname,author_fname;
+
+-- SUM  //////////////////// 
+
+SELECT 
+    SUM(pages)
+FROM
+    books;
+
+SELECT 
+    author_fname, SUM(pages)
+FROM
+    books
+GROUP BY author_fname;
+
+-- AVG /////////
+
+SELECT 
+    AVG(released_year)
+FROM
+    books;
+
+SELECT 
+    AVG(pages)
+FROM
+    books;
+
+SELECT 
+    AVG(stock_quantity)
+FROM
+    books;
+
+SELECT 
+    released_year, AVG(stock_quantity), COUNT(*)
+FROM
+    books
+GROUP BY released_year;
+
+-- Practice, on my own.
+
+SELECT 
+    COUNT(*)
+FROM
+    books;
+
+SELECT 
+    released_year, COUNT(*)
+FROM
+    books
+GROUP BY released_year;
+
+SELECT 
+    SUM(stock_quantity)
+FROM
+    books;
+
+SELECT 
+    author_lname, author_fname, AVG(released_year)
+FROM
+    books
+GROUP BY author_lname , author_fname;
+
+SELECT 
+    CONCAT(author_fname, ' ', author_lname) AS author, pages
+FROM
+    books
+WHERE
+    pages = (SELECT 
+            MAX(pages)
+        FROM
+            books);
+
+SELECT 
+    released_year AS year,
+    COUNT(*) AS '# books',
+    AVG(pages) AS ' avg pages'
+FROM
+    books
+GROUP BY released_year
+ORDER BY year ASC;
+
+
