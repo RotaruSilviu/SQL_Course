@@ -50,4 +50,30 @@ values (200); -- nu v a functiona pentru ca trece de 127 pentru ca folosim tinyi
 
 -- DECIMAL
  
+CREATE TABLE products (
+    price DECIMAL(5 , 2 )
+);
+ insert into products (price) VALUEs( 4.50);
+SELECT 
+    *
+FROM
+    products;
+ 
+ -- FLOAT and DOUBLE
+ -- Float ocupa mai putin amemorie ca dpouble si este precis pana la 7 caractere. pe cand double pana la 15
+ 
+ CREATE TABLE numbers (
+    x FLOAT,
+    y DOUBLE
+);
+ insert into numbers (x, y) values (1.123, 1.123);
+SELECT 
+    *
+FROM
+    numbers;
+ insert into numbers (x, y) values (1.12345678, 1.12345678912345678);
+
+-- DATES and TIME and DATETIME
+
+ 
  
