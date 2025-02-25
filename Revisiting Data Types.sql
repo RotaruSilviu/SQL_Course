@@ -75,5 +75,30 @@ FROM
 
 -- DATES and TIME and DATETIME
 
+CREATE TABLE people (
+    name VARCHAR(50),
+    birthdate DATE,
+    birthtime TIME,
+    birthdt DATETIME
+);
+
+insert into people( name, birthdate, birthtime, birthdt)
+values ('Elton', '2000-12-25', '11:00:00', '200-12-25 11:00:00' );
+
+ select * from people;
+
+insert into people( name, birthdate, birthtime, birthdt)
+values ('Lulu', '1985-04-11', '9:45:10', '1985-04-11 9:45:10' );
+
+insert into people( name, birthdate, birthtime, birthdt)
+values ('Juan', '2020-08-15', '23:59:00', '2020-08-15 23:59:00' );
+
+select curtime(), curdate(), now();
+
+insert into people (name, birthdate, birthtime, birthdt)
+values ('Hazel', curdate(), curtime(),now());
+
+-- Date Functions.
+
  
  
