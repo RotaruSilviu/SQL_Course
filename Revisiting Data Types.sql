@@ -100,5 +100,97 @@ values ('Hazel', curdate(), curtime(),now());
 
 -- Date Functions.
 
- 
+ SELECT 
+    birthdate
+FROM
+    people;
+SELECT 
+    birthdate,
+    DAY(birthdate),
+    DAYOFWEEK(birthdate),
+    DAYOFYEAR(birthdate),
+    monthname(birthdate),
+    dayname(birthdate)
+FROM
+    people;
+    
+SELECT 
+    name,
+    birthdt,
+    YEAR(birthdt),
+    MONTHNAME(birthdt),
+    DAYNAME(birthdt)
+FROM
+    people;
+
+SELECT 
+    name,
+    birthtime,
+    HOUR(birthtime),
+    MINUTE(birthtime),
+    SECOND(birthtime)
+FROM
+    people;
+    
+SELECT 
+    name, DATE(birthdt), TIME(birthdt)
+FROM
+    people;
+    
+-- How to get the month name, day name, and year
+-- april 11 2025
+
+select	concat(
+	monthname(birthdt), 
+    ' ',
+    day(birthdt),
+    ' ',
+    year(birthdt)) as 'Date of birth'
+from
+	people;
+-- sau se mai poate face in felul urmator
+SELECT 
+    birthdt,
+    DATE_FORMAT(birthdt, '%b'),
+    DATE_FORMAT(birthdt, '%a'),
+    DATE_FORMAT(birthdt, '%a %b %e %D')
+FROM
+    people;
+    
+select
+	name,
+	birthdt,
+    date_format(birthdt, '%H:%i')
+from 
+	people;
+
+select 
+	birthdate,
+    birthdt,
+	datediff(curdate(), birthdate) -- face diferenta intre doua dati, si afiseazain zile
+from 
+	people;
+
+SELECT
+    date_add(curdate(), interval 1 year),
+    date_add(curdate(), interval 1 month),
+    date_sub(curdate(), interval 1 year);
+
+select
+	birthdate,
+    date_add(birthdate, interval 18 year)
+from
+	people;
+    
+select timediff(curtime(), '07:00:00');
+	
+select now() - interval 18 year;
+select 
+	name, 
+    birthdate,
+    birthdate + interval 21 year,
+    year(birthdate + interval 21 year) as 'Legal drinking age'
+from 
+	people;
+
  
