@@ -193,4 +193,69 @@ select
 from 
 	people;
 
+-- TIMESTAMPS
+
+select now();
+
+CREATE TABLE captions (
+    text VARCHAR(150),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ insert into captions (text) values ('just me and the girls chillin');
+ insert into captions (text) values ('beautiful sunset');
  
+ SELECT 
+    *
+FROM
+    captions;
+ 
+ CREATE TABLE captions2 (
+    text VARCHAR(150),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP on update CURRENT_TIMESTAMP
+);
+
+insert into captions2 (text) values ('i love life');
+insert into captions2 (text) values ('i am the beast');
+
+select * from captions2;
+
+update captions2 set text= 'i love lofe !!!!!';
+
+ 
+ -- EXERCISE
+ 
+ -- Char este cel mai bine folosit da lucruri care sunt fix in lungime.
+ create TABLE judete (
+	jud_abr CHAR(2));
+    
+insert into judete (jud_abr) values ('BC'), ('B'), ('VS'), ('BR');
+ select * from judete;
+ 
+ create table inventory (
+	item_name VARCHAR (100),
+    price INT, -- mai bine pentru price ar fi decimal(7,2)
+    quantity INT
+    );
+ 
+ -- date time are rangeul mai mare ca time stamp.
+ 
+ select curtime();
+ select curdate();
+ select dayofweek(curdate());
+ select dayname(curdate());
+ select date_format(curdate(), '%m/%d/%Y');
+ select date_format(now(), '%M %D at %k:%s');
+ 
+ create table tweets(
+	content VARCHAR(180),
+    username varchar(20),
+    created_at TIMESTAMP default CURRENT_TIMESTAMP
+    );
+    
+    insert into tweets (content, username)
+	values
+		('My first tweet', 'sylviurotaru');
+        
+	select * from tweets;
+		
