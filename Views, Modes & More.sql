@@ -28,27 +28,52 @@ select * from ordered_series;
 insert into ordered_series ( title, released_year, genre)
 values ('The Great', 2020, 'Comedy');
 
+create or replace view ordered_series as
+select * from series order by released_year desc;
 
+alter view ordered_series as
+select * from series order by released_year;
 
+drop view ordered_series;
 
+-- GROUP BY HAVING
 
+select 
+	title, 
+    avg(rating),
+    count(rating) as count_review
+from full_reviews
+group by title having count(rating) > 1;
 
+-- GROUP BY ROLL UP
 
+select title, avg(rating) 
+from full_reviews
+group by title with ROLLUP; 
+-- are un rand in plus cu sumarul statisticilor, adica aici are un rand in plus cu avg tuturor review urilor.
 
+select title, count(rating)
+from full_reviews
+group by title with ROLLUP;
+-- acelasi lucru aici doar ca la final are numarul tuturor ratingurilor, hence count
 
+select released_year,genre,  avg(rating)
+from full_reviews
+group by released_year, genre with ROLLUP;
 
+-- SQl MODES
 
+select @@GLobal.sql_mode;
+select @@session.sql_mode;
 
+set session sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
 
+-- Full group by
 
-
-
-
-
-
-
-
-
+select title, avg(rating)
+from series
+join reviews on reviews.series_id = series.id
+group by title;
 
 
 
