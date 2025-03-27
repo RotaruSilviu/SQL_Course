@@ -50,19 +50,57 @@ group by photos.id
 order by likes DESC 
 limit 1;
 
+-- IG challenge #5
+-- How many times does the average user post:
+
+select *
+from photos;
 
 
+select 
+    username,
+    count(*)
+from users
+join photos on photos.user_id = users.id
+group by username;
 
+select 
+	(select count(*) FROM photos) /
+    (select count(*) from users) as average;
 
+-- Ig challenge #6
+-- What are trhe top 5 most commonly user hashtags
 
+select * from tags;
+select * from photo_tags;
 
+select 
+	tag_name,
+	count(*) as most_used
+from photo_tags
+join tags on tags.id = photo_tags.tag_id
+group by tag_id
+order by most_used desc
+limit 5;
 
+-- IG challenge #7
+-- Find users who have liked every single photo on the site:
 
+select * from users;
+select * from likes;
+select * from photos;
 
+select * 
+from users
+join likes on likes.user_id = users.id;
 
-
-
-
+select 
+	username,
+    count(*) as total
+from users
+join likes on likes.user_id = users.id
+GROUP BY username
+having  total = (select count(*) from photos);
 
 
 
