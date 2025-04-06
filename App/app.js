@@ -6,7 +6,7 @@
 // //     // insert a new user into the databse
 // // }
 
-
+// npm install @faker-js/faker
 var { faker } = require('@faker-js/faker');
 
 // faker.internet.email()
