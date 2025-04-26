@@ -1,9 +1,10 @@
 var express =require('express');
 var app = express();
+app.set("view engine", "ejs");
 
 var { faker } = require('@faker-js/faker');
-var mysql = require('mysql2');
 
+var mysql = require('mysql2');
 // login for mysql
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -13,10 +14,21 @@ const connection = mysql.createConnection({
 });
 
 
+
+
 app.get("/", function(req, res){
     //console.log(req)
-    res.send("WELCOME TO THE HOME PAGE!")
+    var q = 'SELECT count(*) as count from users';
+    connection.query(q, function (error, results, fields) {
+      if (error) throw error;
+       var count = results[0].count
+      console.log(count);
+      //res.send("We have " + count + " users in our database.")
+      res.render("home",{count: count});
+    });
+    
 });
+
 
 app.get("/joke", function(req, res){
     var joke = "What do you call a dog that does magic tricks? A labracadabrador";
