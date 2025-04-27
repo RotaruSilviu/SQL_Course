@@ -1,8 +1,11 @@
 var express =require('express');
 var app = express();
-app.set("view engine", "ejs");
+var bodyParser = require("body-parser");
 
-var { faker } = require('@faker-js/faker');
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
+//Foloseste  app.css ca stylesheet
+app.use(express.static(__dirname + "/public"));
 
 var mysql = require('mysql2');
 // login for mysql
@@ -12,8 +15,6 @@ const connection = mysql.createConnection({
   password: 'Daniela407#',
   database: 'join_us'
 });
-
-
 
 
 app.get("/", function(req, res){
@@ -27,6 +28,20 @@ app.get("/", function(req, res){
       res.render("home",{count: count});
     });
     
+});
+
+app.post("/register", function(req, res){
+  //var email = req.body.email;
+  var person = {
+        email: req.body.email
+     };
+    connection.query('insert into users set ?', person, function(err, result){
+      if (err) throw err;
+      res.redirect("/")
+      //res.send("Thanks for joining our wait list!")
+    });
+
+  //console.log("You pressed the button! And email is: " + req.body.email)
 });
 
 
